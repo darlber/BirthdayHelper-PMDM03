@@ -19,7 +19,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -32,6 +31,7 @@ import com.example.birthdayhelper.Utils.ConnectionDB;
 import com.example.birthdayhelper.Utils.ContactsUtil;
 import com.example.birthdayhelper.Utils.TimePickerFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         mostrarLista();
 
 
-
     }
 
     @Override
@@ -99,24 +98,60 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void permisos() {
+        List<String> permissionsNeeded = new ArrayList<>();
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1);
+            permissionsNeeded.add(Manifest.permission.SEND_SMS);
         }
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_CONTACTS}, 2);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            permissionsNeeded.add(Manifest.permission.READ_CONTACTS);
         }
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_CONTACTS}, 3);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            permissionsNeeded.add(Manifest.permission.WRITE_CONTACTS);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 100);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.POST_NOTIFICATIONS);
             }
         }
 
-
-
+        if (!permissionsNeeded.isEmpty()) {
+            requestPermissionsLauncher.launch(permissionsNeeded.toArray(new String[0]));
+        }
     }
+
+    private final ActivityResultLauncher<String[]> requestPermissionsLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+                Boolean smsPermissionGranted = result.get(Manifest.permission.SEND_SMS);
+                Boolean contactsPermissionGranted = result.get(Manifest.permission.READ_CONTACTS);
+                Boolean writeContactsPermissionGranted = result.get(Manifest.permission.WRITE_CONTACTS);
+                Boolean notificationsPermissionGranted = result.get(Manifest.permission.POST_NOTIFICATIONS);
+
+                if (smsPermissionGranted != null && smsPermissionGranted) {
+                    Log.d("Permissions", "Permiso para enviar SMS concedido");
+                } else {
+                    Log.d("Permissions", "Permiso para enviar SMS denegado");
+                }
+
+                if (contactsPermissionGranted != null && contactsPermissionGranted) {
+                    Log.d("Permissions", "Permiso para leer contactos concedido");
+                } else {
+                    Log.d("Permissions", "Permiso para leer contactos denegado");
+                }
+
+                if (writeContactsPermissionGranted != null && writeContactsPermissionGranted) {
+                    Log.d("Permissions", "Permiso para escribir en contactos concedido");
+                } else {
+                    Log.d("Permissions", "Permiso para escribir en contactos denegado");
+                }
+
+                if (notificationsPermissionGranted != null && notificationsPermissionGranted) {
+                    Log.d("Permissions", "Permiso para notificaciones concedido");
+                } else {
+                    Log.d("Permissions", "Permiso para notificaciones denegado");
+                }
+            });
+
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Cumpleaños";
