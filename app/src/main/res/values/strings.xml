@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">BirthDay Helper</string>
+    <string name="seccion_editar">Editar Contacto</string>
+    <string name="imagen_contacto_listview">Imagen del Contacto</string>
+    <string name="solo_noti">Aviso: SOLO notificación</string>
+    <string name="sms">Aviso: Enviar SMS</string>
+    <string name="sin_noti">Aviso: Sin notificación</string>
+    <string name="lista_vacia">Aviso: Lista de Contactos Vacía</string>
+    <string name="no_user">Aviso: Sin datos del contacto</string>
+    <string name="lista">Lista de Contactos</string>
+
+    <string name="nombre">Nombre:</string>
+    <string name="nombre_descripcion">Introduce el nombre</string>  <string name="puntos">...</string>
+    <string name="Enviar_sms">Enviar SMS automáticamente</string> <string name="telefono">Teléfono:</string>
+    <string name="telefono_descrip">Selecciona un teléfono</string> <string name="fecha_naci">Fecha de nacimiento:</string>
+    <string name="fecha_naci_descrip">Introduce la fecha de nacimiento</string> <string name="mens">Mensaje:</string>
+    <string name="mens_descrip">Escribe un mensaje</string>
+    <string name="guardar">Guardar</string>
+    <string name="img_contac">Imagen del contacto</string>
+    <string name="enviar_sms">Enviar SMS</string> <string name="sin_datos">Sin Datos</string>
+    <string name="update_contacto_ok">Actualización de datos correcta</string>
+    <string name="update_contacto_fail">Actualización fallida</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="conf_feli">Configurar Felicitaciones</string>
+</resources>

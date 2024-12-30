@@ -1,0 +1,26 @@
+<resources>
+    <style name="Theme.BirthdayHelper." parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">@color/mi_color_primario</item>
+        <item name="colorPrimaryVariant">@color/mi_color_primario_oscuro</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/mi_color_secundario</item>
+        <item name="colorSecondaryVariant">@color/mi_color_secundario_oscuro</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button</item>
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+
+    </style>
+    <style name="Theme.BirthdayHelper.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+    <style name="Theme.BirthdayHelper.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.BirthdayHelper.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
